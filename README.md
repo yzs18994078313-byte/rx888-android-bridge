@@ -48,7 +48,7 @@ MKII 标配 R828D；上游 SDDC 固件在初始化调谐器时将模拟带宽设
 
 VHF 模式 ADC 为 **16 MS/s、16-bit 实数**，USB 样本负载约 **32 MB/s**。IQ 输出率与 ADC 输入率分别设置；进一步降低 IQ 输出率不会改变 USB 原始输入率。HF 路径保留 64 MS/s ADC，尚未完成实机验证。
 
-低于 32 MHz 使用 HF 直采口，32 MHz 至 1.75 GHz 使用 VHF 调谐器口。HF 靠近 DC 或 ADC Nyquist 边界时，可用频谱不对称；本版没有提供全 HF 宽带模式，也没有测试 HF 路径。
+低于 32 MHz 使用 HF 直采口，32 MHz 至 1.75 GHz 使用 VHF 调谐器口。HF 靠近 DC 或 ADC Nyquist 边界时，可用频谱不对称；本版没有提供全 HF 宽带模式，也没有测试 HF 路径（没有天线）。
 
 VHF 使用上游 4.57 MHz 中频约定并做频谱翻转。SpyServer 的增益设置控制 VHF RF 增益，映射到最近硬件档位；IF 暂固定 16.3 dB。HF 映射到 VGA 0–33 dB、衰减器 0 dB。Bias tee 默认关闭。
 
