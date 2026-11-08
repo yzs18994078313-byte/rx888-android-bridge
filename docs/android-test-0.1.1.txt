@@ -1,0 +1,117 @@
+RX888 Android Bridge 0.1.1 实机验证
+日期：2026-11-08
+设备：一加 8T KB2000 / Android 16 / KernelSU root
+用户确认：独立供电 USB 3 Hub；电脑端可正常接收。
+
+最终配置：VHF ADC 16 MS/s，IQ 最高4 MS/s、默认1 MS/s，128×16KiB普通内存USB缓冲。
+已验证：固件 RAM 加载、04b4:00f3→04b4:00f1、USB2→USB3配对总线迁移、READY。
+固定频率连续采样：1MS/s 30s、2MS/s 20s、4MS/s 20s；USB错误、原始及IQ队列丢样均为0。
+调频/增益控制：137.9→138→137.9MHz、gain30→25→30后恢复接收。
+调频会主动停流；调频测试累计原始队列丢弃688128个实数样本，不能保证无缝调频。
+手机内核 usbcore.quirks 原设置为空，测试后验证已恢复为空。
+未验证：OnAir解调听感、HF路径、其他手机、长时间运行。
+
+1MS/s 稳态测试：
+ADB transport ready
+Performing Streamed Install
+Success
+
+Starting: Intent { cmp=org.sddc.rx888bridge/.MainActivity }
+
+Starting service: Intent { act=START cmp=org.sddc.rx888bridge/.BridgeService (has extras) }
+
+正在启动 root 接收进程；请在 root 管理器中授权
+USB link PM: RX888 NO_LPM enumeration workaround enabled
+USB found: 04b4:00f1 bus=2 address=2
+USB runtime PM: already on
+USB 3: RX888mk2, firmware 2.2, endpoint 0x81
+USB link PM: original kernel parameter restored
+ADC 16 MS/s real, USB payload 32 MB/s; IQ output limited to 4 MS/s
+READY SpyServer: 127.0.0.1:5557, forced 16-bit IQ, max 4.0 MS/s; version 0.1.1
+
+LOCAL_RX: rate=1000000 samples=5024000 elapsed=5.01
+LOCAL_RX: rate=1000000 samples=10016000 elapsed=10.00
+LOCAL_RX: rate=1000000 samples=15024000 elapsed=15.01
+LOCAL_RX: rate=1000000 samples=20016000 elapsed=20.00
+LOCAL_RX: rate=1000000 samples=25024000 elapsed=25.01
+LOCAL_RX: rate=1000000 samples=30016000 elapsed=30.00
+RESULT: requested=1000000 delivered=1000459 duration=30.002 samples=30016000 peak=206 rms=42.37
+PASS: phone-local real IQ stream
+ 
+正在启动 root 接收进程；请在 root 管理器中授权
+USB link PM: RX888 NO_LPM enumeration workaround enabled
+USB found: 04b4:00f1 bus=2 address=2
+USB runtime PM: already on
+USB 3: RX888mk2, firmware 2.2, endpoint 0x81
+USB link PM: original kernel parameter restored
+ADC 16 MS/s real, USB payload 32 MB/s; IQ output limited to 4 MS/s
+READY SpyServer: 127.0.0.1:5557, forced 16-bit IQ, max 4.0 MS/s; version 0.1.1
+USB receive pool: 128 x 16384 bytes (2 MiB)
+USB buffers: ordinary application memory
+RX started: 1000000 S/s IQ; HF/VHF mode=VHF tuner
+STAT: rate=1000000 rx_samples=4976000 sent_samples=4976000 usb_errors=0 (+0) queue_dropped_samples=0 queue=0/32 peak_blocks=1 queue_peak_ms=3.8 tcp_waits=0 send_peak_ms=3.0 retune_discarded=0 raw_dropped_samples=0 usb_bytes=159498240 IQ=16-bit
+STAT: rate=1000000 rx_samples=9984000 sent_samples=9984000 usb_errors=0 (+0) queue_dropped_samples=0 queue=0/32 peak_blocks=1 queue_peak_ms=8.4 tcp_waits=0 send_peak_ms=3.0 retune_discarded=0 raw_dropped_samples=0 usb_bytes=319586304 IQ=16-bit
+STAT: rate=1000000 rx_samples=14976000 sent_samples=14976000 usb_errors=0 (+0) queue_dropped_samples=0 queue=0/32 peak_blocks=1 queue_peak_ms=8.4 tcp_waits=0 send_peak_ms=3.0 retune_discarded=0 raw_dropped_samples=0 usb_bytes=479608832 IQ=16-bit
+STAT: rate=1000000 rx_samples=19984000 sent_samples=19984000 usb_errors=0 (+0) queue_dropped_samples=0 queue=0/32 peak_blocks=1 queue_peak_ms=8.4 tcp_waits=0 send_peak_ms=3.0 retune_discarded=0 raw_dropped_samples=0 usb_bytes=639647744 IQ=16-bit
+STAT: rate=1000000 rx_samples=24976000 sent_samples=24976000 usb_errors=0 (+0) queue_dropped_samples=0 queue=0/32 peak_blocks=1 queue_peak_ms=8.4 tcp_waits=0 send_peak_ms=11.0 retune_discarded=0 raw_dropped_samples=0 usb_bytes=799653888 IQ=16-bit
+STAT: rate=1000000 rx_samples=29984000 sent_samples=29984000 usb_errors=0 (+0) queue_dropped_samples=0 queue=0/32 peak_blocks=1 queue_peak_ms=8.4 tcp_waits=0 send_peak_ms=11.0 retune_discarded=0 raw_dropped_samples=0 usb_bytes=959725568 IQ=16-bit
+Client disconnected: sent_samples=30016000 usb_errors=0 queue_dropped_samples=0
+
+
+
+2/4MS/s 与停流/重启：
+LOCAL_RX: rate=2000000 samples=10027008 elapsed=5.00
+LOCAL_RX: rate=2000000 samples=20021248 elapsed=10.00
+LOCAL_RX: rate=2000000 samples=30031872 elapsed=15.00
+LOCAL_RX: rate=2000000 samples=40026112 elapsed=20.01
+RESULT: requested=2000000 delivered=2000685 duration=20.006 samples=40026112 peak=263 rms=59.90
+PASS: phone-local real IQ stream
+
+LOCAL_RX: rate=4000000 samples=20037632 elapsed=5.00
+LOCAL_RX: rate=4000000 samples=40026112 elapsed=10.00
+LOCAL_RX: rate=4000000 samples=60030976 elapsed=15.00
+LOCAL_RX: rate=4000000 samples=80035840 elapsed=20.00
+RESULT: requested=4000000 delivered=4001417 duration=20.002 samples=80035840 peak=366 rms=85.49
+PASS: phone-local real IQ stream
+
+RESULT: requested=1000000 delivered=1012773 duration=3.002 samples=3040000 peak=196 rms=42.19
+PASS: phone-local real IQ stream
+
+
+调频控制：
+RETUNE: frequency=138000000 gain=25
+LOCAL_RX: rate=1000000 samples=4976000 elapsed=5.01
+RETUNE: frequency=137900000 gain=30
+LOCAL_RX: rate=1000000 samples=9856000 elapsed=10.01
+RESULT: requested=1000000 delivered=987446 duration=12.007 samples=11856000 peak=203 rms=42.29
+PASS: phone-local real IQ stream
+
+
+Android DDC 数值测试：
+DDC adc=64000000 rate=500000 center=4570000 offset=35000 flip=0 coherent=10000.05 rms=10000.05
+DDC adc=64000000 rate=500000 center=4570000 offset=35000 flip=1 coherent=10000.05 rms=10000.05
+DDC adc=64000000 rate=500000 center=4570000 offset=350000 flip=0 coherent=0.01 rms=0.40
+DDC adc=64000000 rate=1000000 center=4570000 offset=35000 flip=0 coherent=10000.03 rms=10000.03
+DDC adc=64000000 rate=1000000 center=4570000 offset=35000 flip=1 coherent=10000.03 rms=10000.03
+DDC adc=64000000 rate=1000000 center=4570000 offset=700000 flip=0 coherent=0.01 rms=0.27
+DDC adc=64000000 rate=2000000 center=4570000 offset=35000 flip=0 coherent=10000.04 rms=10000.04
+DDC adc=64000000 rate=2000000 center=4570000 offset=35000 flip=1 coherent=10000.04 rms=10000.04
+DDC adc=64000000 rate=2000000 center=4570000 offset=1400000 flip=0 coherent=0.01 rms=0.12
+DDC adc=64000000 rate=4000000 center=4570000 offset=35000 flip=0 coherent=10000.02 rms=10000.02
+DDC adc=64000000 rate=4000000 center=4570000 offset=35000 flip=1 coherent=10000.02 rms=10000.02
+DDC adc=64000000 rate=4000000 center=4570000 offset=2800000 flip=0 coherent=0.01 rms=0.15
+DDC adc=64000000 rate=8000000 center=4570000 offset=35000 flip=0 coherent=10000.00 rms=10000.00
+DDC adc=64000000 rate=8000000 center=4570000 offset=35000 flip=1 coherent=10000.00 rms=10000.00
+DDC adc=64000000 rate=8000000 center=4570000 offset=5600000 flip=0 coherent=0.01 rms=0.18
+DDC adc=64000000 rate=2000000 center=7100000 offset=-65000 flip=0 coherent=10000.04 rms=10000.04
+DDC adc=32000000 rate=500000 center=4570000 offset=-35000 flip=1 coherent=10000.05 rms=10000.05
+DDC adc=32000000 rate=1000000 center=4570000 offset=-35000 flip=1 coherent=10000.03 rms=10000.03
+DDC adc=32000000 rate=2000000 center=4570000 offset=-35000 flip=1 coherent=10000.05 rms=10000.05
+DDC adc=32000000 rate=4000000 center=4570000 offset=-35000 flip=1 coherent=10000.02 rms=10000.02
+DDC adc=32000000 rate=8000000 center=4570000 offset=-35000 flip=1 coherent=10000.00 rms=10000.00
+DDC adc=16000000 rate=250000 center=4570000 offset=-35000 flip=1 coherent=10000.14 rms=10000.14
+DDC adc=16000000 rate=500000 center=4570000 offset=-35000 flip=1 coherent=10000.07 rms=10000.07
+DDC adc=16000000 rate=1000000 center=4570000 offset=-35000 flip=1 coherent=10000.06 rms=10000.06
+DDC adc=16000000 rate=2000000 center=4570000 offset=-35000 flip=1 coherent=10000.08 rms=10000.08
+DDC adc=16000000 rate=4000000 center=4570000 offset=-35000 flip=1 coherent=10000.04 rms=10000.04
+PASS: DDC counts, phase continuity, sidebands, passband and alias rejection

@@ -1,0 +1,36 @@
+RX888 Android Bridge 0.1.1 offline validation
+Date: 2026-11-08
+Android USB hardware: 1/2/4 MSps fixed-frequency capture verified for 30/20/20 seconds
+
+Host DDC tests:
+DDC rate=500000 center=4570000 offset=35000 flip=0 coherent=10000.05 rms=10000.05
+DDC rate=500000 center=4570000 offset=35000 flip=1 coherent=10000.05 rms=10000.05
+DDC rate=500000 center=4570000 offset=350000 flip=0 coherent=0.01 rms=0.40
+DDC rate=1000000 center=4570000 offset=35000 flip=0 coherent=10000.03 rms=10000.03
+DDC rate=1000000 center=4570000 offset=35000 flip=1 coherent=10000.03 rms=10000.03
+DDC rate=1000000 center=4570000 offset=700000 flip=0 coherent=0.01 rms=0.27
+DDC rate=2000000 center=4570000 offset=35000 flip=0 coherent=10000.04 rms=10000.04
+DDC rate=2000000 center=4570000 offset=35000 flip=1 coherent=10000.04 rms=10000.04
+DDC rate=2000000 center=4570000 offset=1400000 flip=0 coherent=0.01 rms=0.12
+DDC rate=4000000 center=4570000 offset=35000 flip=0 coherent=10000.02 rms=10000.02
+DDC rate=4000000 center=4570000 offset=35000 flip=1 coherent=10000.02 rms=10000.02
+DDC rate=4000000 center=4570000 offset=2800000 flip=0 coherent=0.01 rms=0.15
+DDC rate=8000000 center=4570000 offset=35000 flip=0 coherent=10000.01 rms=10000.01
+DDC rate=8000000 center=4570000 offset=35000 flip=1 coherent=10000.01 rms=10000.01
+DDC rate=8000000 center=4570000 offset=5600000 flip=0 coherent=0.01 rms=0.18
+DDC rate=2000000 center=7100000 offset=-65000 flip=0 coherent=10000.04 rms=10000.04
+PASS: DDC counts, phase continuity, sidebands, passband and alias rejection
+
+Host IQ queue tests:
+Concurrent: accepted=16 dropped=199984 consumed=16
+PASS: held-block safety, full queue, FIFO, wrap, retune flush, concurrent IQ integrity, drop accounting
+
+APK ELF validation:
+lib/arm64-v8a/librx888_bridge.so: AArch64, all LOAD segments >=16KiB aligned
+lib/arm64-v8a/libusb1.0.so: AArch64, all LOAD segments >=16KiB aligned
+lib/arm64-v8a/libc++_shared.so: AArch64, all LOAD segments >=16KiB aligned
+
+APK signature and ZIP alignment: verified by build_app.py
+FX3 firmware internal checksum: verified; 4 sections
+
+Unverified: OnAir RF listening, HF path, long-duration operation and other devices. See android-test-0.1.1.txt.

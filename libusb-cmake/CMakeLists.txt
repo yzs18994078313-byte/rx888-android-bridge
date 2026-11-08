@@ -1,0 +1,21 @@
+cmake_minimum_required(VERSION 3.22)
+project(usrp_android_usb LANGUAGES C)
+if(NOT ANDROID OR NOT ANDROID_ABI STREQUAL "arm64-v8a")
+  message(FATAL_ERROR "Build this project using the Android NDK for arm64-v8a")
+endif()
+set(LIBUSB_SRC "" CACHE PATH "Pinned libusb source tree")
+set(lu "${LIBUSB_SRC}/libusb")
+add_library(usb1.0 SHARED
+  ${lu}/core.c ${lu}/descriptor.c ${lu}/hotplug.c ${lu}/io.c
+  ${lu}/sync.c ${lu}/strerror.c ${lu}/os/linux_usbfs.c
+  ${lu}/os/linux_netlink.c ${lu}/os/events_posix.c ${lu}/os/threads_posix.c)
+target_include_directories(usb1.0 PRIVATE "${LIBUSB_SRC}/android" "${lu}/os")
+target_include_directories(usb1.0 PUBLIC "${lu}")
+target_compile_options(usb1.0 PRIVATE -fvisibility=hidden)
+target_link_libraries(usb1.0 PRIVATE log)
+target_link_options(usb1.0 PRIVATE -Wl,-z,max-page-size=16384)
+add_executable(usb_probe usb_probe.c)
+target_link_libraries(usb_probe PRIVATE usb1.0)
+target_link_options(usb_probe PRIVATE -Wl,-z,max-page-size=16384)
+install(TARGETS usb1.0 usb_probe LIBRARY DESTINATION lib RUNTIME DESTINATION bin)
+install(FILES "${lu}/libusb.h" DESTINATION include/libusb-1.0)

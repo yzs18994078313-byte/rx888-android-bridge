@@ -1,0 +1,14 @@
+/build/
+/dist/
+/tools/
+/firmware-source/SDK/
+__pycache__/
+*.pyc
+*.p12
+*.jks
+*.keystore
+*.apk
+*.apk.idsig
+local.properties
+.idea/
+.vscode/

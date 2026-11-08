@@ -1,0 +1,16 @@
+RX888 Android Bridge 1.0.0 release package checks
+Date: 2026-11-08
+Version: versionCode=10000, versionName=1.0.0; not debuggable
+PASS: APK signature verified and certificate matches final 0.1.1
+Signer certificate SHA-256: be06150fa30bc756dd2cffadc03e9c06adf5638b26e9d060194057e38a7c2895
+PASS: ZIP native-library alignment at 16 KiB
+
+PASS: lib/arm64-v8a/librx888_bridge.so AArch64 ELF, all LOAD segments >=16 KiB aligned
+PASS: lib/arm64-v8a/libusb1.0.so AArch64 ELF, all LOAD segments >=16 KiB aligned
+PASS: lib/arm64-v8a/libc++_shared.so AArch64 ELF, all LOAD segments >=16 KiB aligned
+PASS: original FX3 firmware SHA-256 d5cefa943bc425dc0d46e32be666b9a2e966411c94cae7e1738bcb591febc6ce
+APK SHA-256: 97b0ff20d452d06250e2b08b2ce4a41b1b80e2f6ad1b2b9308f7afe1125603a1
+
+Hardware acceptance: user confirmed final 0.1.1 passed; acquisition logic unchanged.
+1.0.0 upgrade/READY checks: see upgrade-1.0.0.txt.
+Quantified IQ tests and limitations: see android-test-0.1.1.txt.
