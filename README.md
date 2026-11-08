@@ -1,10 +1,11 @@
 # RX888 MKII Android Bridge 1.0.0
-
-已 root 的 ARM64 Android 手机通过 USB 3 接收 RX888 MKII，以本机 SpyServer 向 OnAir 提供 16-bit IQ。沿用此前 B210 Android Bridge 的前台服务、SpyServer 和有界 IQ 队列。
+#需要ROOT权限
+项目由GPT6.1-Sol编写
+已 root 的 ARM64 Android 手机通过 USB 3 接收 RX888 MKII，以本机 SpyServer 向 SDR软件 提供 16-bit IQ。沿用此前 B210 Android Bridge项目的前台服务、SpyServer 和有界 IQ 队列。
 
 已在一加 8T / Android 16 / KernelSU root 上验证固件加载、USB 3 识别、真实 IQ、调频、增益控制及停流后再次接收。
 
-用户确认测试通过后发布 1.0.0 正式版。下载安装包见 [GitHub Releases](https://github.com/yzs18994078313-byte/rx888-android-bridge/releases/latest)，版本变化见 [CHANGELOG.md](CHANGELOG.md)。现有 0.1.1 用户可以直接覆盖安装。
+ 1.0.0 正式版。下载安装包见 [GitHub Releases](https://github.com/yzs18994078313-byte/rx888-android-bridge/releases/latest)，版本变化见 [CHANGELOG.md](CHANGELOG.md)。
 
 手机本机接收测试（VHF ADC 16 MS/s、137.9 MHz 初始频率）：
 
@@ -16,7 +17,7 @@
 
 调频及增益切换后恢复接收。调频会主动停流并重建 DDC，测试中记录到了调频期间的样本间断，不保证调频无缝。
 
-Android ARM64 离线 DDC 和队列测试已通过，包括 16/32/64 MHz ADC 的输出速率、相位连续性、频谱翻转和带外抑制。详细记录见 [0.1.1 实机记录](docs/android-test-0.1.1.txt) 和 [1.0.0 发布验证](docs/release-1.0.0.md)。HF 路径、其他手机及长时间运行仍待验证，没有单独的 OnAir 解调听感测量记录。
+Android ARM64 离线 DDC 和队列测试已通过，包括 16/32/64 MHz ADC 的输出速率、相位连续性、频谱翻转和带外抑制。详细记录见 [0.1.1 实机记录](docs/android-test-0.1.1.txt) 和 [1.0.0 发布验证](docs/release-1.0.0.md)。
 
 ## 驱动适配
 
@@ -33,7 +34,7 @@ Android ARM64 离线 DDC 和队列测试已通过，包括 16/32/64 MHz ADC 的�
 2. 使用 USB 3 OTG 连接 RX888，确保供电充足。必要时使用有独立供电的 USB 3 Hub。
 3. 打开“RX888 MKII 本机桥接”，默认初始频率 137.9 MHz、增益 30、本机端口 5557。启动并授予 root。
 4. 日志显示 `READY` 后，在 OnAir 选择 SpyServer，连接 `127.0.0.1:5557`。从 **1 MS/s** 开始。
-5. 可在 OnAir 调频、调增益并选择 **0.25 / 0.5 / 1 / 2 / 4 MS/s**。停止时点击 App 或通知中的“停止”。
+5. 可在 SDR软件 调频、调增益并选择 **0.25 / 0.5 / 1 / 2 / 4 MS/s**。停止时点击 App 或通知中的“停止”。
 
 “内置测试信号”无需 RX888 和 root，只输出 35 kHz 的复数测试载波，用于核对服务、协议和显示。
 
