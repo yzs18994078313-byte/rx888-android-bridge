@@ -1,5 +1,5 @@
 # RX888 MKII Android Bridge 1.0.0
-#需要ROOT权限
+# 需要ROOT权限
 项目由GPT6.1-Sol编写
 已 root 的 ARM64 Android 手机通过 USB 3 接收 RX888 MKII，以本机 SpyServer 向 SDR软件 提供 16-bit IQ。沿用此前 B210 Android Bridge项目的前台服务、SpyServer 和有界 IQ 队列。
 
